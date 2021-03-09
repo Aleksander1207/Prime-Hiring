@@ -7,7 +7,8 @@ export default class LoginComponent extends Component{
   @tracked password;
 
   @action
-  logUser(){
+  logUser(e){
+      e.preventDefault();
         let userData = {
             'email' : this.email,
             'password' : this.password
