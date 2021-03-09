@@ -1,0 +1,7 @@
+<form {{on "submit" this.logUser}} id="login">
+    <label class='formElement labelLogin'>Email :</label><br>
+    <Input class='formElement input' @value={{this.email}}/><br>
+    <label class='formElement labelLogin'>Password :</label><br>
+    <Input class='formElement input' @value={{this.password}}/><br>
+    <button id="loginButton" class='button formElement' type="submit">Log In</button> 
+</form>
