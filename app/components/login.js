@@ -17,8 +17,9 @@ export default class LoginComponent extends Component{
     };
     let fetchObject = {
         method: 'POST',
+        credentials: 'include',
         headers : {
-            'Content-type' : 'application/json', 
+            'Content-type' : 'application/json',
         },
         body : JSON.stringify(userData),
     };
