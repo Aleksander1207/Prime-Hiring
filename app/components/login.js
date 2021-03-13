@@ -1,16 +1,16 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
+import {inject as service} from "@ember/service";
 
 export default class LoginComponent extends Component{
   @tracked email;
   @tracked password;
   @service router;
-  
+
   @action
-  logRequest(){
-    let result=0;
+  logUser(e){
+    e.preventDefault();
     let userData = {
         'email' : this.email,
         'password' : this.password
@@ -22,30 +22,25 @@ export default class LoginComponent extends Component{
         },
         body : JSON.stringify(userData),
     };
-    fetch('https://gara6.bg/auto-api/users/login',fetchObject)
-        .then(response => {
-            if(!response.ok){
-                throw new Error('Network response was not ok');
-            }
-            result=1;
+    fetch('https://gara6.bg/auto-api/users/login', fetchObject)
+        .then(response =>{
+            return response.json();
         })
-        .catch(error => {
-            alert(`There has been a problem with your fetch operation: ${error}`);
+        .then(data =>{
+            if(data.statusCode == 'SUCCESS'){
+                this.redirectHome();
+            }
+            else{
+                throw Error('Check your data or connection');
+            }
+        })
+        .catch(error =>{
+            alert('Unable to log in ! ' + error);
         });
-    return result;
   }
 
+  redirectHome(){
+      this.router.transitionTo('home');
+  }
 
-  @action
-  logUser(e){
-    e.preventDefault();
-        let result = this.logRequest;
-        if(result){
-            alert('Logged in');
-            this.router.transitionTo('home');
-        }
-        else{
-            alert('Not logged in');
-        }
-    }
 }

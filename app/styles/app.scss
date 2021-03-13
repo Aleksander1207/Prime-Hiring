@@ -1,0 +1,51 @@
+@import "ember-bootstrap/bootstrap";
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  div,
+  span,
+  a,
+  button {
+    font-family: 'Lato', 'Open Sans', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  body {
+    background: #f3f3f3;
+  }
+
+.formElement{
+    margin-top:15px;
+}
+h1,form,.input{
+    text-align: center;
+}
+.input{
+    width:40%;
+    
+}
+form,.buttonHolder{
+    display: grid;
+    place-items: center;
+}
+h1{
+    margin-bottom: 150px;
+}
+#label{
+    font-size: 30px;
+}
+#loginLink{
+    margin: auto;
+    display: block;
+    width:30%;
+}
