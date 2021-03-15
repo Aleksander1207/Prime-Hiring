@@ -19,7 +19,7 @@ export default class LoginComponent extends Component{
         method: 'POST',
         credentials: 'include',
         headers : {
-            'Content-type' : 'application/json',
+            'content-type' : 'application/json',
         },
         body : JSON.stringify(userData),
     };
@@ -29,7 +29,7 @@ export default class LoginComponent extends Component{
         })
         .then(data =>{
             if(data.statusCode == 'SUCCESS'){
-                this.redirectHome();
+                this.redirectHome(data);
             }
             else{
                 throw Error('Check your data or connection');
@@ -40,7 +40,7 @@ export default class LoginComponent extends Component{
         });
   }
 
-  redirectHome(){
+  redirectHome(data){
       this.router.transitionTo('home');
   }
 

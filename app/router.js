@@ -10,5 +10,6 @@ Router.map(function () {
   this.route('login');
   this.route('home',function(){
     this.route('vehicles');
+    this.route('user');
   });
 });

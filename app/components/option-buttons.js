@@ -8,37 +8,16 @@ export default class OptionButtonsComponent extends Component {
 
     @action
     userMe(){
-      let fetchObject = {
-          method: 'GET',
-          credentials: 'include',
-          headers : {
-              'Content-type' : 'application/json',
-          },
-      };
-      fetch('https://gara6.bg/auto-api/users/me', fetchObject)
-          .then(response => {
-              return response.json();
-          })
-          .then(data => {
-              if(data.statusCode == 'SUCCESS'){
-                 console.log(data.data);
-              }
-              else{
-                  throw ('Check your internet connection');
-              }
-          })
-          .catch(error =>{
-              alert('Unable to Log out ! '+ error);
-          });
+      this.router.transitionTo('home.user');
     }
 
     @action
     logOut(){
         let fetchObject = {
             method: 'POST',
-            credentials: 'include',
+            credentials : 'include',
             headers : {
-                'Content-type' : 'application/json',
+                'content-type' : 'application/json',
             },
         };
         fetch('https://gara6.bg/auto-api/users/logout', fetchObject)
