@@ -1,0 +1,6 @@
+<h1>Vehicles</h1>
+<ul id='vehiclesList'>
+    {{#each @model as |vehicle|}}
+        <li id='vehicleItem'><LinkTo @route='home.vehicles.vehicle' @model={{vehicle}}>{{vehicle.regNum}}</LinkTo></li>
+    {{/each}}
+</ul>

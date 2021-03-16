@@ -15,6 +15,7 @@
   p,
   div,
   span,
+  li,
   a,
   button {
     font-family: 'Lato', 'Open Sans', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -27,7 +28,7 @@
 .formElement{
     margin-top:15px;
 }
-h1,form,.input{
+h1,form,.input,.userPageElement,#vehiclesList{
     text-align: center;
 }
 .input{
@@ -48,4 +49,20 @@ h1{
     margin: auto;
     display: block;
     width:30%;
+}
+.userPageElement{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#vehicleItem{
+    margin-top:10px;
+    font-size: 35px;
+
+}
+.vehicleInfo{
+    max-width: 20rem;
+    max-height: fit-content;
+}
+#vehicleKm{
+    float: right;
 }

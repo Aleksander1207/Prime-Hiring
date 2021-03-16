@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 
-export default class HomeUserRoute extends Route {
+export default class HomeVehiclesRoute extends Route {
 
     async model(transition){
         let fetchObject = {
@@ -10,14 +10,14 @@ export default class HomeUserRoute extends Route {
                 'content-type' : 'application/json',
             },
         };
-        const response = await fetch('https://gara6.bg/auto-api/users/me', fetchObject);
+        const response = await fetch('https://gara6.bg/auto-api/vehicles', fetchObject);
         const data = await response.json();
         if(data.statusCode == 'SUCCESS'){
-            console.log(data.data);
-            return data.data;
+            console.log(data.data.results);
+            return data.data.results;
         }
         else{
-            alert('Unable to retrieve your data ! . Please, check your internet connection !');
+            alert('Unable to retrieve vehicles ! . Please, check your internet connection !');
             transition.abort();
         }
     }

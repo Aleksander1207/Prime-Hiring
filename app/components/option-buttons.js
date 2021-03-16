@@ -12,6 +12,11 @@ export default class OptionButtonsComponent extends Component {
     }
 
     @action
+    vehiclesList(){
+        this.router.transitionTo('home.vehicles');
+    }
+
+    @action
     logOut(){
         let fetchObject = {
             method: 'POST',
