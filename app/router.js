@@ -13,7 +13,10 @@ Router.map(function () {
     this.route('user');
     this.route('vehicles', function(){
       this.route('index', { path: '/' });
-      this.route('vehicle', {path : '/:vehicle_id'});
+      this.route('vehicle', {path : '/:vehicle_id'}, function(){
+        this.route('index', { path: '/' });
+        this.route('vehicle-info');
+      });
     });
   });
   

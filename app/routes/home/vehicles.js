@@ -13,7 +13,6 @@ export default class HomeVehiclesRoute extends Route {
         const response = await fetch('https://gara6.bg/auto-api/vehicles', fetchObject);
         const data = await response.json();
         if(data.statusCode == 'SUCCESS'){
-            console.log(data.data.results);
             return data.data.results;
         }
         else{
@@ -23,3 +22,4 @@ export default class HomeVehiclesRoute extends Route {
     }
 
 }
+

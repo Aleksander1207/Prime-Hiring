@@ -1,0 +1,53 @@
+<h1>General Info</h1>
+<div id="imageEditor">
+    <div class="card text-white bg-primary mb-3" id="formImagePlaceholder"> 
+        <img  id="formVehicleImage" src="https://gara6.bg/auto-api/imgs/thmb/{{@model.primaryImgHash}}" alt="Vehicle Image">
+    </div>
+    <button class="btn btn-primary btn-lg homeButton" type="button" id="imageEdit">Edit</button>
+    <button class="btn btn-primary btn-lg homeButton" type="button" id="imageDelete">Delete</button>
+</div>
+<form id="vehicleForm">
+        <label id="label" class="formElement" for="formRegNum">Registration Number</label>
+        <Input class="form-control formElement input" id="formRegNum" @value={{@model.regNum}}/><br>
+        <label id="label" class="formElement" for="formVehicleKm">Vehicle Km</label>
+        <Input class="form-control formElement input" id="formVehicleKm" @value={{@model.km}}/><br>
+        <div class="form-group">
+            <label for="typeSelect">Vehicle Type</label>
+            <select class="form-control" id="typeSelect">
+                <option>{{@model.vehicleType.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="brandSelect">Vehicle Brand</label>
+            <select class="form-control" id="brandSelect">
+                <option>{{@model.vehicleBrand.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="modelSelect">Vehicle Model</label>
+            <select class="form-control" id="modelSelect">
+                <option>{{@model.vehicleModel.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="yearSelect">Year</label>
+            <select class="form-control" id="yearSelect" {{on "click" this.populateYear}}>
+                <option>{{@model.year}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="monthSelect">Month</label>
+            <select class="form-control" id="monthSelect">
+                <option>{{@model.month}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="primaryFuelTypeSelect">Primary Fuel Type</label>
+            <select class="form-control" id="primaryFuelTypeSelect">
+                <option>{{@model.primaryFuelType.code}}</option>
+            </select>
+        </div>
+        <label id="label" class="formElement" for="formPrimaryFuelTank">Primary Fuel Tank, l</label>
+        <Input class="form-control formElement input" id="formPrimaryFuelTank" @value={{@model.primaryFuelTankCapacity}}/><br>
+
+</form>

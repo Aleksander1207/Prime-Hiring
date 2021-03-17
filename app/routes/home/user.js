@@ -13,7 +13,6 @@ export default class HomeUserRoute extends Route {
         const response = await fetch('https://gara6.bg/auto-api/users/me', fetchObject);
         const data = await response.json();
         if(data.statusCode == 'SUCCESS'){
-            console.log(data.data);
             return data.data;
         }
         else{

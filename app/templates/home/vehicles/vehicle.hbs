@@ -1,16 +1,3 @@
-<h1>Vehicle : {{@model.regNum}}</h1>
-<div id='vehicleInfo' class="card text-white bg-primary mb-3">
-    <div class="card-header">
-         <div id='regNum'>Registration Number: {{@model.regNum}}</div>
-         <div id='vehicleKm'>Vehicle km : {{@model.km}}</div>
-    </div>
-    <div class="card-body">
-        <h4>{{@model.vehicleType.code}}</h4>
-        <h4>{{@model.vehicleBrand.name}} {{@model.vehicleModel.name}}</h4>
-  </div>
-</div>
-<div class="card text-white bg-primary mb-3" id="imagePlaceholder"> 
-    <h2>ImagePlaceholder</h2>
-</div>
+{{outlet}}
 
 
