@@ -15,12 +15,18 @@
             <label for="typeSelect">Vehicle Type</label>
             <select class="form-control" id="typeSelect">
                 <option>{{@model.vehicleType.code}}</option>
+                {{#each @model.vehicleTypes.code as |type|}}
+                    <option>{{type}}</option>
+                {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="brandSelect">Vehicle Brand</label>
             <select class="form-control" id="brandSelect">
                 <option>{{@model.vehicleBrand.name}}</option>
+                {{#each @model.vehicleBrands.name as |brand|}}
+                    <option>{{brand}}</option>
+                {{/each}}
             </select>
         </div>
         <div class="form-group">
@@ -32,22 +38,49 @@
         <div class="form-group">
             <label for="yearSelect">Year</label>
             <select class="form-control" id="yearSelect" {{on "click" this.populateYear}}>
-                <option>{{@model.year}}</option>
+                {{#if this.emptyYears}}
+                    <option>{{@model.year}}</option>
+                {{else}}
+                    {{#each this.years as |year|}}
+                        <option>{{year}}</option>
+                    {{/each}}
+                {{/if}}
             </select>
         </div>
         <div class="form-group">
             <label for="monthSelect">Month</label>
-            <select class="form-control" id="monthSelect">
-                <option>{{@model.month}}</option>
+            <select class="form-control" id="monthSelect" {{on "click" this.populateMonth}}>
+                {{#if this.emptyMonths}}
+                    <option>{{@model.month}}</option>
+                {{else}}
+                    {{#each this.months as |month|}}
+                        <option>{{month}}</option>
+                    {{/each}}
+                {{/if}}
             </select>
         </div>
         <div class="form-group">
             <label for="primaryFuelTypeSelect">Primary Fuel Type</label>
             <select class="form-control" id="primaryFuelTypeSelect">
-                <option>{{@model.primaryFuelType.code}}</option>
+                    <option>{{@model.primaryFuelType.code}}</option>
+                    {{#each @model.fuelTypes.code as |fuelType|}}
+                        <option>{{fuelType}}</option>
+                    {{/each}}
             </select>
         </div>
         <label id="label" class="formElement" for="formPrimaryFuelTank">Primary Fuel Tank, l</label>
         <Input class="form-control formElement input" id="formPrimaryFuelTank" @value={{@model.primaryFuelTankCapacity}}/><br>
+        <label id="label" class="formElement" for="horsePower">Engine Power, hp</label>
+        <Input class="form-control formElement input" id="horsePower" @value={{@model.hp}}/><br>
+        <label id="label" class="formElement" for="kiloWat">Engine Power, kW</label>
+        <Input class="form-control formElement input" id="kiloWat" @value={{@model.kw}}/><br>
+        <label id="label" class="formElement" for="displacement">Displacement, sm3</label>
+        <Input class="form-control formElement input" id="displacement" @value={{@model.displacement}}/><br>
+        <label id="label" class="formElement" for="vin">VIN</label>
+        <Input class="form-control formElement input" id="vin" @value={{@model.vinNum}}/><br>
+        <label id="label" class="formElement" for="engineNum">Engine Number</label>
+        <Input class="form-control formElement input" id="engineNum" @value={{@model.engineNum}}/><br>
+        <label id="label" class="formElement" for="startKm">Bought km</label>
+        <Input class="form-control formElement input" id="startKm" @value={{@model.startKm}}/><br>
 
 </form>
