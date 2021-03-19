@@ -14,57 +14,48 @@
         <div class="form-group">
             <label for="typeSelect">Vehicle Type</label>
             <select class="form-control" id="typeSelect">
-                <option>{{@model.vehicleType.code}}</option>
-                {{#each @model.vehicleTypes.code as |type|}}
-                    <option>{{type}}</option>
+                {{#each this.types as |type|}}
+                    <option selected={{render-selected type.code @model.vehileType.code}}>{{type.code}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="brandSelect">Vehicle Brand</label>
             <select class="form-control" id="brandSelect">
-                <option>{{@model.vehicleBrand.name}}</option>
-                {{#each @model.vehicleBrands.name as |brand|}}
-                    <option>{{brand}}</option>
+                {{#each this.brands as |brand|}}
+                    <option selected={{render-selected itemValue=brand.name vehicleValue=@model.vehileBrand.name}}>{{brand.name}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="modelSelect">Vehicle Model</label>
             <select class="form-control" id="modelSelect">
-                <option>{{@model.vehicleModel.name}}</option>
+                {{#each this.models as |vModel|}}
+                    <option selected={{render-selected itemValue=vModel.name vehicleValue=@model.vehicleModel.name}}>{{model.name}}</option>
+                {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="yearSelect">Year</label>
-            <select class="form-control" id="yearSelect" {{on "click" this.populateYear}}>
-                {{#if this.emptyYears}}
-                    <option>{{@model.year}}</option>
-                {{else}}
+            <select class="form-control" id="yearSelect">
                     {{#each this.years as |year|}}
-                        <option>{{year}}</option>
+                        <option selected="{{render-selected itemValue=year vehicleValue=@model.year}}">{{year}}</option>
                     {{/each}}
-                {{/if}}
             </select>
         </div>
         <div class="form-group">
             <label for="monthSelect">Month</label>
-            <select class="form-control" id="monthSelect" {{on "click" this.populateMonth}}>
-                {{#if this.emptyMonths}}
-                    <option>{{@model.month}}</option>
-                {{else}}
+            <select class="form-control" id="monthSelect">
                     {{#each this.months as |month|}}
                         <option>{{month}}</option>
                     {{/each}}
-                {{/if}}
             </select>
         </div>
         <div class="form-group">
             <label for="primaryFuelTypeSelect">Primary Fuel Type</label>
             <select class="form-control" id="primaryFuelTypeSelect">
-                    <option>{{@model.primaryFuelType.code}}</option>
-                    {{#each @model.fuelTypes.code as |fuelType|}}
-                        <option>{{fuelType}}</option>
+                    {{#each this.fuelTypes as |fuelType|}}
+                        <option>{{fuelType.code}}</option>
                     {{/each}}
             </select>
         </div>
@@ -77,7 +68,7 @@
         <label id="label" class="formElement" for="displacement">Displacement, sm3</label>
         <Input class="form-control formElement input" id="displacement" @value={{@model.displacement}}/><br>
         <label id="label" class="formElement" for="vin">VIN</label>
-        <Input class="form-control formElement input" id="vin" @value={{@model.vinNum}}/><br>
+        <Input class="form-control formElement input" id="vin" maxlength="17" {{on "change" (fn this.upperCase 1)}} @value={{@model.vinNum}}/><br>
         <label id="label" class="formElement" for="engineNum">Engine Number</label>
         <Input class="form-control formElement input" id="engineNum" @value={{@model.engineNum}}/><br>
         <label id="label" class="formElement" for="startKm">Bought km</label>
