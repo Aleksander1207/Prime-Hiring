@@ -57,7 +57,6 @@ h1{
 #vehicleItem{
     margin-top:10px;
     font-size: 35px;
-
 }
 #vehicleInfo{
     max-width:800px;
@@ -113,4 +112,24 @@ h1{
     position: relative;
     left:100px;
     bottom:350px;
+}
+#formRegNum,#vin,#engineNum{
+    text-transform: uppercase;
+}
+#documentsDiv{
+    place-items: center;
+}
+#startKm{
+    margin-bottom: 50px;
+}
+.form-check-input{
+    width: 35px;
+    height: 35px;
+}
+.checklabel{
+    margin-left: 40px;
+    font-size: 25px;
+}
+.checkboxHolder{
+    margin-top:40px;
 }

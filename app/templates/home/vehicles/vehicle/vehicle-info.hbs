@@ -1,51 +1,51 @@
 <h1>General Info</h1>
 <div id="imageEditor">
     <div class="card text-white bg-primary mb-3" id="formImagePlaceholder"> 
-        <img  id="formVehicleImage" src="https://gara6.bg/auto-api/imgs/thmb/{{@model.primaryImgHash}}" alt="Vehicle Image">
+        <img  id="formVehicleImage" src="https://gara6.bg/auto-api/imgs/thmb/{{this.imgSrc}}" alt="Vehicle Image">
     </div>
     <button class="btn btn-primary btn-lg homeButton" type="button" id="imageEdit">Edit</button>
     <button class="btn btn-primary btn-lg homeButton" type="button" id="imageDelete">Delete</button>
 </div>
 <form id="vehicleForm">
         <label id="label" class="formElement" for="formRegNum">Registration Number</label>
-        <Input class="form-control formElement input" id="formRegNum" @value={{@model.regNum}}/><br>
-        <label id="label" class="formElement" for="formVehicleKm">Vehicle Km</label>
-        <Input class="form-control formElement input" id="formVehicleKm" @value={{@model.km}}/><br>
+        <Input class="form-control formElement input" id="formRegNum" required maxlength="12" @value={{this.regNum}}/><br>
+        <label id="label" class="formElement" for="formVehicleKm" >Vehicle Km</label>
+        <Input class="form-control formElement input" type="number" step="1" min="0" max="9999999" required id="formVehicleKm" @value={{this.km}}/><br>
         <div class="form-group">
             <label for="typeSelect">Vehicle Type</label>
-            <select class="form-control" id="typeSelect">
+            <select required class="form-control" id="typeSelect">
                 {{#each this.types as |type|}}
-                    <option selected={{render-selected type.code @model.vehileType.code}}>{{type.code}}</option>
+                    <option>{{type.code}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="brandSelect">Vehicle Brand</label>
-            <select class="form-control" id="brandSelect">
+            <select required class="form-control" id="brandSelect">
                 {{#each this.brands as |brand|}}
-                    <option selected={{render-selected itemValue=brand.name vehicleValue=@model.vehileBrand.name}}>{{brand.name}}</option>
+                    <option selected={{render-selected brand @model.vehicleBrand}}>{{brand.name}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="modelSelect">Vehicle Model</label>
-            <select class="form-control" id="modelSelect">
-                {{#each this.models as |vModel|}}
-                    <option selected={{render-selected itemValue=vModel.name vehicleValue=@model.vehicleModel.name}}>{{model.name}}</option>
+            <select required class="form-control" id="modelSelect">
+                {{#each this.models as |model|}}
+                    <option>{{model.name}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="yearSelect">Year</label>
-            <select class="form-control" id="yearSelect">
+            <select required class="form-control" id="yearSelect">
                     {{#each this.years as |year|}}
-                        <option selected="{{render-selected itemValue=year vehicleValue=@model.year}}">{{year}}</option>
+                        <option >{{year}}</option>
                     {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="monthSelect">Month</label>
-            <select class="form-control" id="monthSelect">
+            <select required class="form-control" id="monthSelect">
                     {{#each this.months as |month|}}
                         <option>{{month}}</option>
                     {{/each}}
@@ -53,25 +53,52 @@
         </div>
         <div class="form-group">
             <label for="primaryFuelTypeSelect">Primary Fuel Type</label>
-            <select class="form-control" id="primaryFuelTypeSelect">
+            <select required class="form-control" id="primaryFuelTypeSelect">
                     {{#each this.fuelTypes as |fuelType|}}
                         <option>{{fuelType.code}}</option>
                     {{/each}}
             </select>
         </div>
         <label id="label" class="formElement" for="formPrimaryFuelTank">Primary Fuel Tank, l</label>
-        <Input class="form-control formElement input" id="formPrimaryFuelTank" @value={{@model.primaryFuelTankCapacity}}/><br>
+        <Input class="form-control formElement input" id="formPrimaryFuelTank" step="1" min="0" max="10000" type="number" required @value={{this.primaryFuelTankCapacity}}/><br>
         <label id="label" class="formElement" for="horsePower">Engine Power, hp</label>
-        <Input class="form-control formElement input" id="horsePower" @value={{@model.hp}}/><br>
+        <Input class="form-control formElement input" id="horsePower" step="1" min="0" max="10000" type="number" pattern="[0-9.]" {{on "change" (fn this.calculatePower "kw")}} required @value={{this.hp}}/><br>
         <label id="label" class="formElement" for="kiloWat">Engine Power, kW</label>
-        <Input class="form-control formElement input" id="kiloWat" @value={{@model.kw}}/><br>
+        <Input class="form-control formElement input" id="kiloWat" step="1" min="0" max="10000" type="number" pattern="[0-9.]" {{on "change" (fn this.calculatePower "hp")}} required @value={{this.kw}}/><br>
         <label id="label" class="formElement" for="displacement">Displacement, sm3</label>
-        <Input class="form-control formElement input" id="displacement" @value={{@model.displacement}}/><br>
+        <Input class="form-control formElement input" id="displacement" step="1" min="0" type="number" required @value={{this.displacement}}/><br>
         <label id="label" class="formElement" for="vin">VIN</label>
-        <Input class="form-control formElement input" id="vin" maxlength="17" {{on "change" (fn this.upperCase 1)}} @value={{@model.vinNum}}/><br>
+        <Input class="form-control formElement input" id="vin" required maxlength="17" @value={{this.vin}}/><br>
         <label id="label" class="formElement" for="engineNum">Engine Number</label>
-        <Input class="form-control formElement input" id="engineNum" @value={{@model.engineNum}}/><br>
+        <Input class="form-control formElement input" id="engineNum" required @value={{this.engineNum}}/><br>
         <label id="label" class="formElement" for="startKm">Bought km</label>
-        <Input class="form-control formElement input" id="startKm" @value={{@model.startKm}}/><br>
+        <Input class="form-control formElement input" id="startKm" step="1" min="0" max="{{this.km}}" required @value={{this.startKm}} type="number"/><br>
+        <div id="documentsDiv">
+            <h1>Required Documents</h1>
+            <p class="lead">Select required document for this vehicle.</p>
+            <p class="lead">They are going to apear in the vehicle main page. All documents can be found in the archive.</p>
+        </div>
+
+        <div class="form-check checkboxHolder">
+            <input class="form-check-input" type="checkbox" checked="" {{on "change" (fn this.addDocument 1)}}>
+            <label class="form-check-label checklabel">Annual technical inspection</label>
+        </div>
+        <div class="form-check checkboxHolder">
+            <input class="form-check-input" type="checkbox" {{on "change" (fn this.addDocument 2)}}>
+            <label class="form-check-label checklabel">Third-party liability insurance</label>
+        </div>
+        <div class="form-check checkboxHolder">
+            <input class="form-check-input" type="checkbox" {{on "change" (fn this.addDocument 3)}}>
+            <label class="form-check-label checklabel">Car Insurance</label>
+        </div>
+        <div class="form-check checkboxHolder">
+            <input class="form-check-input" type="checkbox" {{on "change" (fn this.addDocument 4)}}>
+            <label class="form-check-label checklabel">Vignette</label>
+        </div>
+        <div class="form-check checkboxHolder">
+            <input class="form-check-input" type="checkbox" {{on "change" (fn this.addDocument 5)}}>
+            <label class="form-check-label checklabel">Tax</label>
+        </div>
+
 
 </form>
