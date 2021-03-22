@@ -1,6 +1,6 @@
 <h1>General Info</h1>
 <div id="imageEditor">
-    <div class="card text-white bg-primary mb-3" id="formImagePlaceholder"> 
+    <div class="card text-white bg-primary mb-3" id="formImagePlaceholder">
         <img  id="formVehicleImage" src="https://gara6.bg/auto-api/imgs/thmb/{{this.imgSrc}}" alt="Vehicle Image">
     </div>
     <button class="btn btn-primary btn-lg homeButton" type="button" id="imageEdit">Edit</button>
@@ -14,23 +14,23 @@
         <div class="form-group">
             <label for="typeSelect">Vehicle Type</label>
             <select required class="form-control" id="typeSelect">
-                {{#each this.types as |type|}}
-                    <option>{{type.code}}</option>
+                {{#each vehicleTypeService.all as |type|}}
+                    <option selected={{is-equal type.code @model.vehicleType.code}}>{{type.code}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="brandSelect">Vehicle Brand</label>
             <select required class="form-control" id="brandSelect">
-                {{#each this.brands as |brand|}}
-                    <option selected={{render-selected brand @model.vehicleBrand}}>{{brand.name}}</option>
+                {{#each vehicleBrandService.all as |brand|}}
+                    <option selected={{is-equal brand.name @model.vehicleBrand.name}}>{{brand.name}}</option>
                 {{/each}}
             </select>
         </div>
         <div class="form-group">
             <label for="modelSelect">Vehicle Model</label>
             <select required class="form-control" id="modelSelect">
-                {{#each this.models as |model|}}
+                {{#each vehicleModelService.all as |model|}}
                     <option>{{model.name}}</option>
                 {{/each}}
             </select>
@@ -54,7 +54,7 @@
         <div class="form-group">
             <label for="primaryFuelTypeSelect">Primary Fuel Type</label>
             <select required class="form-control" id="primaryFuelTypeSelect">
-                    {{#each this.fuelTypes as |fuelType|}}
+                    {{#each fuelTypeService.all as |fuelType|}}
                         <option>{{fuelType.code}}</option>
                     {{/each}}
             </select>

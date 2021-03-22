@@ -1,16 +1,38 @@
 import Service from '@ember/service';
-import { inject as service } from '@ember/service';
+import {
+  inject as service
+} from '@ember/service';
 import RSVP from 'rsvp';
 
 export default class ApplicationDataService extends Service {
-    @service('fetch-request') request;
+  @service('custom-fetch') customFetchService;
 
-    getData(){
-        return RSVP.hash({
-            types : this.request.fetchData('https://gara6.bg/auto-api/vehicleTypes'),
-            brands :  this.request.fetchData('https://gara6.bg/auto-api/vehicleBrands?pageSize=2147483647'),
-            models :  this.request.fetchData('https://gara6.bg/auto-api/vehicleModels?pageSize=2147483647'),
-            fuelTypes : this.request.fetchData('https://gara6.bg/auto-api/fuelTypes')
-        });
-    }
+  getData() {
+    return RSVP.hash({
+      types: this.customFetchService.makeRequest({
+        endPoint: 'vehicleTypes',
+        queryParams: {
+          pageSize: this.constants.MAX_INT
+        }
+      }),
+      brands: this.customFetchService.makeRequest({
+        endPoint: 'vehicleBrands',
+        queryParams: {
+          pageSize: this.constants.MAX_INT
+        }
+      }),
+      models: this.customFetchService.makeRequest({
+        endPoint: 'vehicleModels',
+        queryParams: {
+          pageSize: this.constants.MAX_INT
+        }
+      }),
+      fuelTypes: this.customFetchService.makeRequest({
+        endPoint: 'fuelTypes',
+        queryParams: {
+          pageSize: this.constants.MAX_INT
+        }
+      })
+    });
+  }
 }
