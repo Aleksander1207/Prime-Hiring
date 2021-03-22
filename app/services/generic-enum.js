@@ -30,6 +30,10 @@ export default class GenericEnumService extends Service {
     });
   }
 
+   refresh(){
+      return this.loadRequest();
+   }
+
   get all(){
     return this._data;
   }

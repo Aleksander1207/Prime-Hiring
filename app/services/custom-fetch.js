@@ -35,15 +35,15 @@ export default class FetchRequestService extends Service {
 
     return fetch(url, fetchObject).then((response)=>{
       if(response.status==200){
-        return response.json().then((payload)=>{
-          if (payload.statusCode == this.constants.STATUS_CODE_SUCCESS) {
-            return payload.data;
-          } else {
-            throw payload;
-          }
-        });
+        return response.json();
       }else{
         throw response;
+      }
+    }).then((payload)=>{
+      if (payload.statusCode == this.constants.STATUS_CODE_SUCCESS) {
+        return payload.data;
+      } else {
+        throw payload;
       }
     }).catch((err)=>{
       logger(err);
