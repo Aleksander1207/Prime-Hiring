@@ -1,19 +1,18 @@
-export function initialize(application) {
-
+export function initialize(application){
 
   var constants = Ember.Object.extend({
-    MAX_INT: Math.pow(2, 31) - 1,
-    STATUS_CODE_SUCCESS: "SUCCESS",
-    STATUS_CODE_FAILURE: "FAILURE",
-    FATAL_ERROR: "FATAL_ERROR",
-    HTTP_METHOD_POST: "POST",
-    HTTP_METHOD_PUT: "PUT",
-    HTTP_METHOD_GET: "GET",
-    HTTP_METHOD_DELETE: "DELETE",
+    MAX_INT : Math.pow(2, 31) - 1,
+    STATUS_CODE_SUCCESS : "SUCCESS",
+    STATUS_CODE_FAILURE : "FAILURE",
+    FATAL_ERROR : "FATAL_ERROR",
+    HTTP_METHOD_POST : "POST",
+    HTTP_METHOD_PUT : "PUT",
+    HTTP_METHOD_GET : "GET",
+    HTTP_METHOD_DELETE : "DELETE",
 
-    HTTP_ERROR_RESOURCE_NOT_FOUND: "HTTP_ERROR_RESOURCE_NOT_FOUND",
-    HTTP_ERROR_FORBIDDEN: "HTTP_ERROR_FORBIDDEN",
-    HTTP_ERROR_UNAUTHORIZED: "HTTP_ERROR_UNAUTHORIZED",
+    HTTP_ERROR_RESOURCE_NOT_FOUND : "HTTP_ERROR_RESOURCE_NOT_FOUND",
+    HTTP_ERROR_FORBIDDEN : "HTTP_ERROR_FORBIDDEN",
+    HTTP_ERROR_UNAUTHORIZED : "HTTP_ERROR_UNAUTHORIZED",
   });
 
   application.register('constants:main', constants);
@@ -24,6 +23,4 @@ export function initialize(application) {
   application.inject('service', 'constants', 'constants:main');
 };
 
-export default {
-  initialize
-};
+export default {initialize};

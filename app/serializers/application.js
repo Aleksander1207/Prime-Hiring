@@ -1,7 +1,5 @@
 import JSONSerializer from '@ember-data/serializer/json';
-import {
-  EmbeddedRecordsMixin
-} from '@ember-data/serializer/rest';
+import { EmbeddedRecordsMixin } from '@ember-data/serializer/rest';
 
 let AppSerializer = JSONSerializer.extend(EmbeddedRecordsMixin, {
   normalizeResponse(store, primaryModelClass, payload, id, requestType) {

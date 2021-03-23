@@ -9,7 +9,7 @@ export default class FetchRequestService extends Service {
   };
 
   get baseUrl() {
-    return this.host + "/" + this.namespace + "/";
+    return this.host + '/' + this.namespace + '/';
   }
 
   makeRequest(opt) {
@@ -33,23 +33,25 @@ export default class FetchRequestService extends Service {
       headers: headers
     };
 
-    return fetch(url, fetchObject).then((response)=>{
-      if(response.status==200){
+    return fetch(url, fetchObject).then((response) =>{
+      if(response.status == 200){
         return response.json();
-      }else{
+      }
+      else{
         throw response;
       }
-    }).then((payload)=>{
+    }).then((payload) =>{
       if (payload.statusCode == this.constants.STATUS_CODE_SUCCESS) {
         return payload.data;
       } else {
         throw payload;
       }
-    }).catch((err)=>{
+    }).catch((err) =>{
       logger(err);
       if(err.status){
         throw this.handleHttpException(err);
-      }else if(err.statusCode == this.constants.STATUS_CODE_FAILURE){
+      }
+      else if(err.statusCode == this.constants.STATUS_CODE_FAILURE){
         throw err.errorCode;
       }
       throw this.constants.FATAL_ERROR;
@@ -59,9 +61,11 @@ export default class FetchRequestService extends Service {
   handleHttpException(err){
     if(err.status == 404){
       return this.constants.HTTP_ERROR_RESOURCE_NOT_FOUND;
-    }else if(err.status == 401){
+    }
+    else if(err.status == 401){
       return this.constants.HTTP_ERROR_UNAUTHORIZED;
-    } else if(err.status == 403){
+    }
+    else if(err.status == 403){
       return this.constants.HTTP_ERROR_FORBIDDEN;
     }
     else this.constants.FATAL_ERROR;
@@ -74,9 +78,10 @@ export default class FetchRequestService extends Service {
     let queryString = '?';
     for (let property in queryParams) {
       if (queryParams.hasOwnProperty(property) && queryParams[property] != null) {
-        queryString += property + "=" + queryParams[property] + "&";
+        queryString += property + '=' + queryParams[property] + '&';
       }
     }
     return queryString.slice(0, -1);
   }
+
 }

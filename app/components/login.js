@@ -9,6 +9,17 @@ export default class LoginComponent extends Component{
   @service router;
 
   @action
+  togglePassword(){
+      let input = document.getElementById('exampleInputPassword1');
+      if(input.type == 'password'){
+          input.type='text';
+      }
+      else{
+          input.type='password';
+      }
+  }
+
+  @action
   logUser(e){
     e.preventDefault();
     let userData = {
@@ -29,7 +40,7 @@ export default class LoginComponent extends Component{
         })
         .then(data =>{
             if(data.statusCode == 'SUCCESS'){
-                this.redirectHome(data);
+                this.redirectHome();
             }
             else{
                 throw Error('Check your data or connection');
@@ -40,7 +51,7 @@ export default class LoginComponent extends Component{
         });
   }
 
-  redirectHome(data){
+  redirectHome(){
       this.router.transitionTo('home');
   }
 

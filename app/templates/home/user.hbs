@@ -1,6 +1,3 @@
-<h2 class='userPageElement'>Email :</h2><br>
-<h4 class='userPageElement'>{{@model.email}}</h4><br>
-<h2 class='userPageElement'>First Name : </h2>
-<h4 class='userPageElement'>{{@model.fName}}</h4><br>
-<h2 class='userPageElement'>Last Name : </h2>
-<h4 class='userPageElement'>{{@model.lName}}</h4>
+<Home::UserData @text="Email :">{{@model.email}}</Home::UserData>
+<Home::UserData @text="First Name :">{{@model.fName}}</Home::UserData>
+<Home::UserData @text="Last Name :">{{@model.lName}}</Home::UserData>
