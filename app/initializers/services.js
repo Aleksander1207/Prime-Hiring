@@ -17,6 +17,7 @@ export default {
       application.inject('route', sv[0], 'service:' + sv[1]);
       application.inject('template', sv[0], 'service:' + sv[1]);
       application.inject('model', sv[0], 'service:' + sv[1]);
+      application.inject('helper', sv[0], 'service:' + sv[1]);
     });
 
   }

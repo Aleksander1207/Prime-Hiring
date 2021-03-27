@@ -29,10 +29,9 @@ export default class FetchRequestService extends Service {
     let fetchObject = {
       credentials: 'include',
       method: opt.method || this.constants.HTTP_METHOD_GET,
-      data: data,
+      body: data,
       headers: headers
     };
-
     return fetch(url, fetchObject).then((response) =>{
       if(response.status == 200){
         return response.json();
@@ -47,7 +46,8 @@ export default class FetchRequestService extends Service {
         throw payload;
       }
     }).catch((err) =>{
-      logger(err);
+      //logger(err);
+      console.log(err);
       if(err.status){
         throw this.handleHttpException(err);
       }

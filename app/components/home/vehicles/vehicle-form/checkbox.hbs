@@ -1,0 +1,10 @@
+<div class="form-check checkboxHolder">
+    {{#each @vehicleAttr as |attr|}}
+        {{#if (includes @value attr.value)}}
+            <input class="form-check-input" type="checkbox" checked value={{@value}} >
+        {{else}}
+            <input class="form-check-input" type="checkbox" value={{@value}}>
+        {{/if}}
+        <label class="form-check-label checklabel">{{@text}}</label>
+    {{/each}}
+</div>

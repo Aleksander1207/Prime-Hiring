@@ -1,0 +1,7 @@
+<div id="imageEditor">
+    <div class="card text-white bg-primary mb-3" id="formImagePlaceholder">
+        <img id={{@id}} src="https://gara6.bg/auto-api/imgs/thmb/{{@source}}" alt="Vehicle Image">
+        <button class="btn btn-primary btn-lg" type="button" id="imageDelete" {{on "click" this.edit}}>Delete</button>
+        <button class="btn btn-primary btn-lg" type="button" id="imageEdit" {{on "click" this.edit}}>Edit</button>
+    </div>
+</div>

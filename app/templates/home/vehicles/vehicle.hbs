@@ -1,63 +1,7 @@
 <h1>General Info</h1>
-<div id="imageEditor">
-    <div class="card text-white bg-primary mb-3" id="formImagePlaceholder">
-        <img  id="formVehicleImage" src="https://gara6.bg/auto-api/imgs/thmb/{{@model.primaryImgHash}}" alt="Vehicle Image">
-    </div>
-    <button class="btn btn-primary btn-lg homeButton" type="button" id="imageEdit">Edit</button>
-    <button class="btn btn-primary btn-lg homeButton" type="button" id="imageDelete">Delete</button>
-</div>
-<form id="vehicleForm">
-        <Home::Vehicles::InputField maxlength=12 type="text" @id="formRegNum" @text="Registration Number" @value={{@model.regNum}} />
-        <Home::Vehicles::InputField type="number" step=1 min=0 max=9999999 @id="formVehicleKm" @text="Vehicle Km" @value={{@model.km}} />
+<Home::Vehicles::VehicleForm @model={{@model}} @types={{vehicleTypeService.all}} @brands={{vehicleBrandService.all}} 
+@models={{filter-models @model.vehicleBrand.name vehicleModelService.all}} @fuelTypes={{fuelTypeService.all}} />
 
-        <Home::Vehicles::Dropdown @id="typeSelect" @text="Vehicle Type">
-            {{#each vehicleTypeService.all as |type|}}
-                    <option selected={{is-equal type.code @model.vehicleType.code}}>{{type.code}}</option>
-            {{/each}}
-        </Home::Vehicles::Dropdown>
-
-        <Home::Vehicles::Dropdown @id="brandSelect" @text="Vehicle Brand">
-            {{#each vehicleBrandService.all as |brand|}}
-                    <option selected={{is-equal brand.name @model.vehicleBrand.name}}>{{brand.name}}</option>
-            {{/each}}
-        </Home::Vehicles::Dropdown>
-
-        <Home::Vehicles::Dropdown @id="modelSelect" @text="Vehicle Model">
-            {{#each vehicleModelService.all as |model|}}
-                    <option selected={{is-equal model.name @model.vehicleModel.name}}>{{model.name}}</option>
-            {{/each}}
-        </Home::Vehicles::Dropdown>
-
-        <Home::Vehicles::Years @vehicleYear={{@model.year}} />
-
-        <Home::Vehicles::Months @vehicleMonth={{@model.month}} />  
-
-        <Home::Vehicles::Dropdown @id="primaryFuelTypeSelect" @text="Primary Fuel Type">
-            {{#each fuelTypeService.all as |fuelType|}}
-                <option selected={{is-equal fuelType.code @model.primaryFuelType.code}}>{{fuelType.code}}</option>
-            {{/each}}
-        </Home::Vehicles::Dropdown>
-
-        <Home::Vehicles::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="formPrimaryFuelTank" @text="Primary Fuel Tank, l" @value={{@model.primaryFuelTankCapacity}}/>
-        <Home::Vehicles::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="horsePower" @text="Engine Power, hp" @value={{@model.hp}} />
-        <Home::Vehicles::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="kiloWat" @text="Engine Power, kW" @value={{@model.kw}} />
-        <Home::Vehicles::InputField step=1 min=0 type="number" pattern="[0-9.]" @id="displacement" @text="Displacement, sm3" @value={{@model.displacement}} />
-        <Home::Vehicles::InputField minlength=17 maxlength=17 @id="vin" @text="VIN" @type="text" @value={{@model.vinNum}} />
-        <Home::Vehicles::InputField @id="engineNum" @text="Engine Number" @type="text" @value={{@model.engineNum}} />
-        <Home::Vehicles::InputField step=1 min=0 max={{@model.km}} type="number" @id="startKm" @text="Bought km" @value={{@model.startKm}} />
-
-        <div id="documentsDiv">
-            <h1>Required Documents</h1>
-            <p class="lead">Select required document for this vehicle.</p>
-            <p class="lead">They are going to apear in the vehicle main page. All documents can be found in the archive.</p>
-        </div>
-
-        <Home::Vehicles::Checkbox @text="Annual technical inspection" @vehicleAttr={{@model.vehicleAttributes}} @number=1 />
-        <Home::Vehicles::Checkbox @text="Third-party liability insurance" @vehicleAttr={{@model.vehicleAttributes}} @number=2 />
-        <Home::Vehicles::Checkbox @text="Car Insurance" @vehicleAttr={{@model.vehicleAttributes}} @number=3 />
-        <Home::Vehicles::Checkbox @text="Vignette" @vehicleAttr={{@model.vehicleAttributes}} @number=4 />
-        <Home::Vehicles::Checkbox @text="Tax" @vehicleAttr={{@model.vehicleAttributes}} @number=5 />
-</form>
 
 
 
