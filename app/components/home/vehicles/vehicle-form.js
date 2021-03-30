@@ -3,97 +3,51 @@ import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 
 export default class VehicleFormComponent extends Component {
-    @service('custom-fetch') customFetchService;
+    @service store;
 
     @action
     update(){
         let url = window.location.href;
         let backslashIndex = url.lastIndexOf('/');
-        let id = url.slice(backslashIndex+1);
+        let id = parseInt(url.slice(backslashIndex+1));
         let fullImageSource = document.getElementById('formVehicleImage').src;
-        let primaryImgHash = fullImageSource.slice(36);
-        let regNum = document.getElementById('formRegNum').value;
-        let km = document.getElementById('formVehicleKm').value;
+        //let primaryImgHash = fullImageSource.slice(36);
+        //console.log(primaryImgHash);
         let vehicleTypeId = document.getElementById('typeSelect').value;
-        let vehicleBrandId = document.getElementById('brandSelect').value;
+        let brandSelect = document.getElementById('brandSelect');
+        let brandId = brandSelect.value;
+        let selectedBrand = brandSelect.options[brandSelect.selectedIndex].text;
+        let vehicleBrand = {
+            'id' : brandId,
+            'name' : selectedBrand,
+        };
+        let brandName = document.getElementById('brandName').value;
         let vehicleModelId = document.getElementById('modelSelect').value;
+        let modelName = document.getElementById('modelName').value;
         let yearSelect = document.getElementById('yearSelect');
-        let year = yearSelect.options[yearSelect.selectedIndex].text;
+        let year = parseInt(yearSelect.options[yearSelect.selectedIndex].text);
         let monthSelect = document.getElementById('monthSelect');
-        let month = monthSelect.options[monthSelect.selectedIndex].text;
+        let month = parseInt(monthSelect.options[monthSelect.selectedIndex].text);
         let primaryFuelTypeId = document.getElementById('primaryFuelTypeSelect').value;
-        let primaryFuelTankCapacity = document.getElementById('formPrimaryFuelTank').value;
-        let hp = document.getElementById('horsePower').value;
-        let kw = document.getElementById('kiloWat').value;
-        let displacement = document.getElementById('displacement').value;
-        let vin = document.getElementById('vin').value;
-        let engineNum = document.getElementById('engineNum').value;
-        let startKm = document.getElementById('startKm').value;
+        let secondaryFuelTypeId = document.getElementById('secondaryFuelTypeSelect').value;
         let markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
         let attributesValue = '';
         for (let checkbox of markedCheckbox) {
             attributesValue+= checkbox.value.toString() + ',';
         }
-        let vehicleAttributes = [];
-        let requiredDocs = {
-            'id' : 144,
-            'name' : 'requiredDocumentTypeIds',
-            'value' : attributesValue,
-        }
-        vehicleAttributes.push(requiredDocs);
-        let newData = {
-            'id' : parseInt(id),
-            'regNum' : regNum,
-            'km' : parseInt(km),
-            'vehicleType' : {
-                'id' : parseInt(vehicleTypeId),
-            },
-            'vehicleBrand' : {
-                'id' : parseInt(vehicleBrandId),
-            },
-            'vehicleBrandName' : null,
-            'vehicleModel' : {
-                'id' : parseInt(vehicleModelId),
-            },
-            'vehicleModelName' : null,
-            'year' : parseInt(year),
-            'month' : parseInt(month),
-            'primaryFuelType' : {
-                'id' : parseInt(primaryFuelTypeId),
-            },
-            'primaryFuelTankCapacity' : parseInt(primaryFuelTankCapacity),
-            'secondaryFuelType' : null,
-            'secondaryFuelTankCapacity' : null,
-            'hp' : parseInt(hp),
-            'kw' : parseInt(kw),
-            'dispacement' : parseInt(displacement),
-            'vinNum' : vin,
-            'engineNum' : engineNum,
-            'startKm' : parseInt(startKm),
-            'vehicleAttributes' : vehicleAttributes,
-            'vehicleAttributesToRemove' : null,
-            'documents' : [],
-            'documentsToRemove' : null,
-            'imgs' : [],
-            'imgsToRemove' : null,
-            'module' : {
-                'id' : 63,
-            }, 
-            'regNumTemplate' : null,
-            'tiresToRemove' : null,
-            'vehicleDocumentsToRemove' : null,
-            'vehicleEventsToRemove' : null,
-            'vehicleFuelLogsToRemove' : null,
-            'vehicleUsers' : [],
-            'vehicleUsersToRemove' : null,
-            'workCardsToRemove' : null,
-        };
-        let responseData =  this.customFetchService.makeRequest({
-            endPoint : 'vehicles/' + id,
-            data : JSON.stringify(newData),
-            method : 'PUT',
+        this.store.findRecord('vehicle', id).then((vehicle) =>{
+            vehicle.year = year;
+            vehicle.month = month;
+            if(brandName == ''){
+                vehicle.vehicleBrandName = null;
+            }
+            if(modelName == ''){
+                vehicle.vehicleModelName = null;
+            }
+            console.log(vehicle.changedAttributes());
+            vehicle.save();
         });
-        console.log(responseData);
+        
     }
 
     @action
@@ -159,6 +113,29 @@ export default class VehicleFormComponent extends Component {
             modelNameField.style.display = 'none';
             modelNameLabel.style.display = 'none';
             modelToggler.innerHTML = 'Other Model';
+        }
+    }
+
+    @action
+    addFuelType(){
+        let secondaryFuelTypeSelect = document.getElementById('secondaryFuelTypeSelect');
+        let secondaryFuelTypeLabel = document.getElementById('secondaryFuelTypeLabel');
+        let secondaryFuelTypeButton = document.getElementById('toggleSecondaryFuelType');
+        let secondaryFuelTankCapacity = document.getElementById('formSecondaryFuelTank');
+        let secondaryFuelTankLabel = document.getElementById('secondaryFuelTankLabel');
+        if(secondaryFuelTypeSelect.style.display == 'none' && secondaryFuelTypeLabel.style.display == 'none'){
+            secondaryFuelTypeSelect.style.display = 'block';
+            secondaryFuelTypeLabel.style.display = 'block';
+            secondaryFuelTypeButton.innerHTML = 'Remove';
+            secondaryFuelTankCapacity.style.display = 'block';
+            secondaryFuelTankLabel.style.display = 'block';
+        }
+        else{
+            secondaryFuelTypeSelect.style.display = 'none';
+            secondaryFuelTypeLabel.style.display = 'none';
+            secondaryFuelTankCapacity.style.display = 'none';
+            secondaryFuelTankLabel.style.display = 'none';
+            secondaryFuelTypeButton.innerHTML = 'Add Secondary Fuel Type';
         }
     }
 }

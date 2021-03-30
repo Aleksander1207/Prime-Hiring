@@ -1,5 +1,7 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import { inject as service } from '@ember/service';
+import Inflector from 'ember-inflector';
+import { camelize } from '@ember/string';
 
 export default class ApplicationAdapter extends JSONAPIAdapter {
   @service('custom-fetch') customFetchService;
@@ -9,11 +11,12 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
       var queryParams = null;
       var ignore401 = false;
       method = method || "GET";
+      const inflector = Inflector.inflector;
 
       if (snapshot.adapterOptions && snapshot.adapterOptions.hasOwnProperty('endPoint')) {
         endPoint = snapshot.adapterOptions.endPoint;
       } else {
-        endPoint = inflector.pluralize(snapshot.modelName).camelize();
+        endPoint = camelize(inflector.pluralize(snapshot.modelName));
       }
 
       if (snapshot.adapterOptions && snapshot.adapterOptions.includeId != null) {

@@ -21,6 +21,7 @@ export function initialize(application){
   application.inject('route', 'constants', 'constants:main');
   application.inject('template', 'constants', 'constants:main');
   application.inject('service', 'constants', 'constants:main');
+  application.inject('adapter', 'constants', 'constants:main');
 };
 
 export default {initialize};

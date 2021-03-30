@@ -1,6 +1,6 @@
 <form id="vehicleForm" {{on "submit" this.update}}>
         <Home::Vehicles::VehicleForm::ImageEditor @id="formVehicleImage" @source={{@model.primaryImgHash}} />
-        <Home::Vehicles::VehicleForm::InputField maxlength=12 type="text" @id="formRegNum" @text="Registration Number" @value={{@model.regNum}} />
+        <Home::Vehicles::VehicleForm::InputField maxlength=12 type="text" @id="formRegNum" @text="Registration Number" @value={{(pretify-reg-num @model.regNum)}} />
         <Home::Vehicles::VehicleForm::InputField type="number" step=1 min=0 max=9999999 @id="formVehicleKm" @text="Vehicle Km" @value={{@model.km}} />
 
         <Home::Vehicles::VehicleForm::Dropdown @id="typeSelect" @text="Vehicle Type">
@@ -14,7 +14,7 @@
                     <option selected={{is-equal brand.name @model.vehicleBrand.name}} value={{brand.id}}>{{brand.name}}</option>
             {{/each}}
         </Home::Vehicles::VehicleForm::Dropdown>
-        <Home::Vehicles::VehicleForm::InputField maxlength=45 type="text" @lid="brandNameLabel" @id="brandName" @text="Brand Name" />
+        <Home::Vehicles::VehicleForm::InputField maxlength=45 type="text" @lid="brandNameLabel" @id="brandName" @text="Brand Name" @value={{@model.vehicleBrandName}} />
         <button type="button" id="toggleBrand" class="btn btn-primary btn-sm" {{on "click" this.toggleBrand}}>Other Brand</button>
 
         <Home::Vehicles::VehicleForm::Dropdown @id="modelSelect" @text="Vehicle Model" @lid="modelSelectLabel">
@@ -22,7 +22,7 @@
                     <option selected={{is-equal model.name @model.vehicleModel.name}} value={{model.id}}>{{model.name}}</option>
             {{/each}}
         </Home::Vehicles::VehicleForm::Dropdown>
-        <Home::Vehicles::VehicleForm::InputField maxlength=45 type="text" @lid="modelNameLabel" @id="modelName" @text="Model Name" />
+        <Home::Vehicles::VehicleForm::InputField maxlength=45 type="text" @lid="modelNameLabel" @id="modelName" @text="Model Name" @value={{@model.vehicleModelName}} />
         <button type="button" id="toggleModel" class="btn btn-primary btn-sm" {{on "click" this.toggleModel}}>Other Model</button>
 
         <Home::Vehicles::VehicleForm::Years id="yearSelect" @vehicleYear={{@model.year}} />
@@ -36,6 +36,16 @@
         </Home::Vehicles::VehicleForm::Dropdown>
 
         <Home::Vehicles::VehicleForm::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="formPrimaryFuelTank" @text="Primary Fuel Tank, l" @value={{@model.primaryFuelTankCapacity}}/>
+        
+        <button type="button" id="toggleSecondaryFuelType" class="btn btn-primary btn-sm" {{on "click" this.addFuelType}}>Add Secondary Fuel Type</button>
+        <Home::Vehicles::VehicleForm::Dropdown @id="secondaryFuelTypeSelect" @text="Secondary Fuel Type" @lid="secondaryFuelTypeLabel">
+            {{#each @fuelTypes as |fuelType|}}
+                <option selected={{is-equal fuelType.code @model.secondaryFuelType.code}} value={{fuelType.id}}>{{fuelType.code}}</option>
+            {{/each}}
+        </Home::Vehicles::VehicleForm::Dropdown>
+
+        <Home::Vehicles::VehicleForm::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="formSecondaryFuelTank" @text="Secondary Fuel Tank, l" @lid="secondaryFuelTankLabel" @value={{@model.secondaryFuelTankCapacity}}/>
+
         <Home::Vehicles::VehicleForm::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="horsePower" @text="Engine Power, hp" @value={{@model.hp}} />
         <Home::Vehicles::VehicleForm::InputField step=1 min=0 max=10000 type="number" pattern="[0-9.]" @id="kiloWat" @text="Engine Power, kW" @value={{@model.kw}} />
         <Home::Vehicles::VehicleForm::InputField step=1 min=0 type="number" pattern="[0-9.]" @id="displacement" @text="Displacement, sm3" @value={{@model.displacement}} />

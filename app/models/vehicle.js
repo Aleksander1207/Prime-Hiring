@@ -1,11 +1,11 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr , belongsTo} from '@ember-data/model';
 
 export default class VehicleModel extends Model {
     @attr('string') regNum;
     @attr('string') engineNum;
     @attr('string') vinNum;
     @attr('number') km;
-    @attr('number') startkm;
+    @attr('number') startKm;
     @attr('number') year;
     @attr('number') month;
     @attr('string', {defaultValue : null}) vehicleModelName;
@@ -19,10 +19,9 @@ export default class VehicleModel extends Model {
     @attr('number') displacement;
     @attr('number') hp;
     @attr('number') kw;
-    @attr('string', {defaultValue : null}) regNumTemplate;
     @attr('number') primaryFuelTankCapacity;
     @attr('number', {defaultValue : null}) secondaryFuelTankCapacity;
-    @attr module;
+    @belongsTo('module') module;
     @attr vehicleAttributes;
     @attr({defaultValue : null}) vehicleAttributesToRemove;
     @attr documents;
