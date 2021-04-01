@@ -1,7 +1,6 @@
-import JSONSerializer from '@ember-data/serializer/json';
-import { EmbeddedRecordsMixin } from '@ember-data/serializer/rest';
+import ApplicationSerializer from 'gara6/serializers/application';
 
-export default class ModuleSerializer extends JSONSerializer.extend(EmbeddedRecordsMixin) {
+export default class ModuleSerializer extends ApplicationSerializer {
   attrs = {
     vehicleCount: { serialize : false, deserialize : 'records' }
   };

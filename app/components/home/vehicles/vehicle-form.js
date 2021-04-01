@@ -6,38 +6,54 @@ export default class VehicleFormComponent extends Component {
     @service store;
 
     @action
+    toggleBrandSelect(){
+        let brandSelect = document.getElementById('brandSelect');
+        brandSelect.style.display="none";
+        brandSelect.style.display="block";
+    }
+
+    @action
     update(){
         let url = window.location.href;
         let backslashIndex = url.lastIndexOf('/');
         let id = parseInt(url.slice(backslashIndex+1));
-        let fullImageSource = document.getElementById('formVehicleImage').src;
-        //let primaryImgHash = fullImageSource.slice(36);
-        //console.log(primaryImgHash);
-        let vehicleTypeId = document.getElementById('typeSelect').value;
+        let typeSelect = document.getElementById('typeSelect');
+        let typeId = typeSelect.value;
+        let selectedType = typeSelect.options[typeSelect.selectedIndex].text;
         let brandSelect = document.getElementById('brandSelect');
         let brandId = brandSelect.value;
         let selectedBrand = brandSelect.options[brandSelect.selectedIndex].text;
-        let vehicleBrand = {
-            'id' : brandId,
-            'name' : selectedBrand,
-        };
         let brandName = document.getElementById('brandName').value;
-        let vehicleModelId = document.getElementById('modelSelect').value;
+        let modelSelect = document.getElementById('modelSelect');
+        let modelId = modelSelect.value;
+        let selectedModel = modelSelect.options[modelSelect.selectedIndex].text;
         let modelName = document.getElementById('modelName').value;
         let yearSelect = document.getElementById('yearSelect');
         let year = parseInt(yearSelect.options[yearSelect.selectedIndex].text);
         let monthSelect = document.getElementById('monthSelect');
         let month = parseInt(monthSelect.options[monthSelect.selectedIndex].text);
-        let primaryFuelTypeId = document.getElementById('primaryFuelTypeSelect').value;
+        let fuelTypeSelect = document.getElementById('primaryFuelTypeSelect');
+        let fuelTypeId = fuelTypeSelect.value;
+        let selectedFuelType = fuelTypeSelect.options[fuelTypeSelect.selectedIndex].text;
         let secondaryFuelTypeId = document.getElementById('secondaryFuelTypeSelect').value;
         let markedCheckbox = document.querySelectorAll('input[type="checkbox"]:checked');
         let attributesValue = '';
         for (let checkbox of markedCheckbox) {
             attributesValue+= checkbox.value.toString() + ',';
         }
+
         this.store.findRecord('vehicle', id).then((vehicle) =>{
+            vehicle.vehicleType.id = typeId;
+            vehicle.vehicleType.code = selectedType;
+            vehicle.vehicleBrand.id = brandId;
+            vehicle.vehicleBrand.name = selectedBrand;
+            vehicle.vehicleModel.id = modelId;
+            vehicle.vehicleModel.name = selectedModel;
+            vehicle.primaryFuelType.id = fuelTypeId;
+            vehicle.primaryFuelType.code = selectedFuelType;
             vehicle.year = year;
             vehicle.month = month;
+            vehicle.vehicleAttributes[0].value = attributesValue;
             if(brandName == ''){
                 vehicle.vehicleBrandName = null;
             }

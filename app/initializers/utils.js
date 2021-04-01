@@ -36,7 +36,30 @@ export function initialize(application) {
     }
   };
 
-};
+  window.pretifyRegNum = function(regNum){
+    let result='';
+    let formatted='';
+    let text = regNum.split('');
+    for(let i=0;i<text.length;i++){
+      if(text[i] == ' '){
+        continue;
+      }
+      formatted+=text[i];
+    }
+    for(let i=0; i<formatted.length; i++){
+        let char = Number(formatted[i]);
+        if(( isNaN(char) && !isNaN(formatted[i+1]) ) || ( !isNaN(char) && isNaN(formatted[i+1]) ) && (i+1 !=formatted.length)){
+            result+=formatted[i] + ' ' + formatted[i+1];
+            i++;
+        }
+        else{
+            result+=formatted[i];
+        }
+    }
+    return result;
+
+  };
+}
 
 export default {
   initialize

@@ -1,8 +1,8 @@
-import JSONSerializer from '@ember-data/serializer/json';
-import { EmbeddedRecordsMixin } from '@ember-data/serializer/rest';
+import ApplicationSerializer from 'gara6/serializers/application';
 
-export default class VehicleSerializer extends JSONSerializer.extend(EmbeddedRecordsMixin) {
+export default class VehicleSerializer extends ApplicationSerializer {
   attrs = {
-    primaryImgHash: { serialize : false, deserialize : 'records' }
+    primaryImgHash: { serialize : false, deserialize : 'records' },
+    module: {serialize : 'records', deserialize : 'records'}
   };
 }
