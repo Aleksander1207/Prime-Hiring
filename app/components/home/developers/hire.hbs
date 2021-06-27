@@ -1,0 +1,19 @@
+<form {{on 'submit' this.hire}}>
+    <div class="form-check checkboxHolder">
+        {{#each @model as |developer|}}
+            {{#if developer.isAvailable}}
+                <div class="checkbox-container">
+                    <input class="form-check-input"  type="checkbox" value={{developer.id}} name="developer">
+                    <label class="form-check-label checklabel">{{developer.data.name}} : {{developer.data.tech}} Developer</label><br>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+    <div id="dateSelector">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" required name="startDate" min={{this.fullDate}} {{on 'change' this.changed}}><br><br>
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" required name="endDate">
+    </div>
+    <button type="submit" id="loginLink" class="btn btn-primary btn-lg">Hire</button>
+</form>

@@ -1,5 +1,5 @@
 import EmberRouter from '@ember/routing/router';
-import config from 'gara6/config/environment';
+import config from 'prime-hiring/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
@@ -7,13 +7,15 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
+  this.route('sign-up');
   this.route('login');
   this.route('home', function(){
     this.route('index', { path: '/' });
-    this.route('user');
-    this.route('vehicles', function(){
-      this.route('index', { path: '/' });
-      this.route('vehicle', {path : '/:vehicle_id'});
+    this.route('developers', function(){
+      this.route('index', {path: '/'});
+      this.route('developer', {path : '/:developer_id'});
+      this.route('create');
+      this.route('hire');
     });
   });
   

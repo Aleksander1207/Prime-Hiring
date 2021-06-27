@@ -28,127 +28,87 @@
 .formElement{
     margin-top:15px;
 }
-h1,form,.input,.userPageElement,#vehiclesList{
+h1,h2,form,.input,#developersList{
     text-align: center;
 }
 .input{
     width:40%;
-    
 }
 form,.buttonHolder{
     display: grid;
     place-items: center;
 }
 h1{
-    margin-bottom: 150px;
+    margin-bottom: 120px;
+    margin-top: 60px;
+}
+h2{
+    margin-bottom: 80px;
 }
 #label{
     font-size: 30px;
 }
 #loginLink{
-    margin: auto;
+    margin: 40px auto;
     display: block;
     width:30%;
 }
-.userPageElement{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-#vehicleItem{
+#developerItem{
     margin-top:10px;
     font-size: 35px;
-}
-#vehicleInfo{
-    max-width:800px;
-    max-height: fit-content;
-    margin:auto;
-    display: block;
-}
-#vehicleKm{
-    float: right;
-}
-#vehicleImage{
-    border-radius: 20px;
-    width: 500px;
-    height:300px;
-    padding: 20px;
-}
-#imageEditor{
-    position: relative;
-    top:350px;
-    right: 600px;
-}
-#formVehicleImage{
-    border-radius: 20px;
-    width: 300px;
-    height:200px;
-    padding: 10px;
-}
-#formImagePlaceholder{
-    border-radius: 20px;
-    width:300px;
-    height:250px;
-}
-#imageEdit{
-    margin-left: 20px;
-    width:80px;
-    height: 50px;
-    background-color: white;
-    color:#007BFF;
-    font-weight: bold;
-    position: relative;
-    bottom: 50px;
-    left: 150px;
-}
-#imageDelete{
-    width:120px;
-    height: 50px;
-    background-color: white;
-    color:#007BFF;
-    font-weight: bold;
-    position: relative;
-    left: 20px;
-    bottom: 3px;
-}
-#vehicleForm{
-    position: relative;
-    left:100px;
-    bottom:350px;
-}
-#formRegNum,#vin,#engineNum{
-    text-transform: uppercase;
-}
-#documentsDiv{
-    place-items: center;
-}
-#startKm{
-    margin-bottom: 50px;
 }
 .form-check-input{
     width: 35px;
     height: 35px;
+    position: absolute;
+    left: 0px;
+}
+.checkbox-container{
+    margin:20px;
 }
 .checklabel{
-    margin-left: 40px;
     font-size: 25px;
 }
 .checkboxHolder{
-    margin-top:40px;
+    margin:20px auto;
+    width:30%;
 }
-#passwordToggler{
-    width:40x;
-    height:40px;
-    margin:10px;
+#descriptionLabel{
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
-#saveVehicleData{
-    margin-top: 200px;
-    width:400px;
-    height: 70px;
+#description{
+    margin-bottom: 50px;
 }
-#brandName,#brandNameLabel,#modelName,#modelNameLabel,#secondaryFuelTypeLabel,
-#secondaryFuelTypeSelect,#secondaryFuelTankLabel,#formSecondaryFuelTank,#imageUploader{
+#years{
+    margin-top:20px;
+    margin-bottom: 30px;
+}
+#langSelect{
+    margin-bottom: 30px;
+}
+#dev-id{
     display: none;
 }
-#toggleBrand,#toggleModel,#toggleSecondaryFuelType{
-    margin-bottom: 20px;
+#delete-button{
+    position: fixed;
+    top:30px;
+    right:40px;
+}
+#create-button{
+    margin: 20px auto;
+    position: absolute;
+    left:35%;
+}
+#hire-button{
+    margin: 20px auto;
+    position: absolute;
+    left:50%;
+}
+#dateSelector{
+    padding :20px;
+}
+#dateSelector label{
+    font-size: 20px;
+    margin-right: 30px;
 }

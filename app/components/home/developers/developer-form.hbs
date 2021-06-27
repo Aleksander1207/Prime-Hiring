@@ -1,0 +1,40 @@
+{{#if @model.data.name}}
+    <button class="btn btn-primary btn-lg formElement" id='delete-button' type="button" {{on 'click' this.delete}}>Delete</button>
+{{/if}}
+<form {{on 'submit' this.create}}>
+    <Home::Developers::DeveloperForm::InputField type="text" required @id="name" @lid="nameLabel" @text="Name" @value={{@model.data.name}} />
+    
+    <Home::Developers::DeveloperForm::InputField type="text" @id="email" @lid="emailLabel" @text="Email" required @value={{@model.data.email}} />
+    
+    <Home::Developers::DeveloperForm::InputField type="tel"  maxlength="10" @id="phone" @lid="phoneLabel" required @text="Phone Number" @value={{@model.data.phone}} />
+    
+    <Home::Developers::DeveloperForm::InputField type="text" required @id="location" @lid="locationLabel" @text="Location" @value={{@model.data.location}} />
+    
+    <Home::Developers::DeveloperForm::InputField type="url" @id="picture" @lid="pictureLabel" @text="Profile Picture Link (Optional)" @value={{@model.data.picture}} />
+
+    <Home::Developers::DeveloperForm::InputField type="number" @id="price" required @lid="priceLabel" @text="Price/Hour" @value={{@model.data.price}} step="1" min="0" max="9999999" />
+    
+    <Home::Developers::DeveloperForm::Dropdown @id="techSelect" @lid="techLabel" @text="Technology" >
+        {{#each this.techs as |tech|}}
+            <option selected={{is-equal tech.name @model.data.tech}} value={{tech.id}}>{{tech.name}}</option>
+        {{/each}}
+    </Home::Developers::DeveloperForm::Dropdown>
+    
+    <label for="description" id="descriptionLabel">Description (Optional)</label>
+    <textarea id="description" name="description" rows="6" cols="50" >
+        {{@model.data.description}}
+    </textarea>
+    
+    <Home::Developers::DeveloperForm::InputField type="number" required @id="years" @lid="yearLabel" @text="Years Of Experience" @value={{@model.data.years}} step="1" min="0" max="80" />
+
+    <Home::Developers::DeveloperForm::Dropdown @id="langSelect" @lid="langLabel" @text="Native Language" >
+        {{#each this.language as |lang|}}
+            <option selected={{is-equal lang.name @model.data.lang }} value={{lang.id}}>{{lang.name}}</option>
+        {{/each}}
+    </Home::Developers::DeveloperForm::Dropdown>
+
+    <Home::Developers::DeveloperForm::InputField type="url" @id="linkedIn" @lid="linkedInLabel" @text="LinkedIn Profile Link (Optional)" @value={{@model.data.linkedIn}} />
+
+    <button class="btn btn-primary btn-lg formElement" id='loginLink' type="submit">Save</button>
+
+ </form>

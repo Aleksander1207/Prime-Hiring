@@ -1,9 +1,9 @@
-# gara6
+# prime-hiring
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
-## Prerequisites
+## Prerequisites -> SETUP Guide Here:
 
 You will need the following things properly installed on your computer.
 
@@ -15,7 +15,7 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd gara6`
+* `cd prime-hiring`
 * `npm install`
 
 ## Running / Development

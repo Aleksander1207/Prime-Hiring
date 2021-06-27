@@ -1,0 +1,10 @@
+<h1>Developers</h1>
+<Home::Developers::DevelopersList>
+    {{#each @model as |developer|}}
+        <li id='developerItem'><LinkTo @route="home.developers.developer" @model={{developer.id}}>{{developer.data.name}} : {{developer.data.tech}} Developer</LinkTo></li>
+    {{/each}}
+</Home::Developers::DevelopersList>
+<LinkTo @route="home.developers.create" id="create-button"class="btn btn-primary btn-lg">Create Developer</LinkTo>
+<LinkTo @route="home.developers.hire" id="hire-button"class="btn btn-primary btn-lg">Hire Developers</LinkTo>
+
+

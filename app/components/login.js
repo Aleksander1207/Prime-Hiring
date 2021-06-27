@@ -22,37 +22,19 @@ export default class LoginComponent extends Component{
   @action
   logUser(e){
     e.preventDefault();
-    let userData = {
-        'email' : this.email,
-        'password' : this.password
-    };
-    let fetchObject = {
-        method: 'POST',
-        credentials: 'include',
-        headers : {
-            'content-type' : 'application/json',
-        },
-        body : JSON.stringify(userData),
-    };
-    fetch('https://gara6.bg/auto-api/users/login', fetchObject)
-        .then(response =>{
-            return response.json();
-        })
-        .then(data =>{
-            if(data.statusCode == 'SUCCESS'){
-                this.redirectHome();
-            }
-            else{
-                throw Error('Check your data or connection');
-            }
-        })
-        .catch(error =>{
-            alert('Unable to log in ! ' + error);
-        });
-  }
-
-  redirectHome(){
-      this.router.transitionTo('home');
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    let existingProfile = false;
+    users.forEach(user =>{
+        if(user.data.email == this.email && user.data.password == this.password){
+            existingProfile = true;
+        }
+    });
+    if(existingProfile){
+        this.router.transitionTo('home');
+    }
+    else{
+        alert("Incorrect username/password");
+    }
   }
 
 }

@@ -1,5 +1,5 @@
-import Application from 'gara6/app';
-import config from 'gara6/config/environment';
+import Application from 'prime-hiring/app';
+import config from 'prime-hiring/config/environment';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';

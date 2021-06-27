@@ -1,0 +1,8 @@
+<form id='login' {{on 'submit' this.signUp}}>
+    <label id="label" class="formElement" for="exampleInputEmail1">Email address</label>
+    <Input class="form-control formElement input" id="exampleInputEmail1" placeholder="Enter email" @value={{this.email}}/><br>
+    <label id="label" for="exampleInputPassword1">Password</label>
+    <Input type="password" class="form-control formElement input" id="exampleInputPassword1" placeholder="Password" @value={{this.password}}/><br>
+    <input type="checkbox" {{on "click" this.togglePassword}}>Show Password
+    <button id='loginLink' class='btn btn-primary btn-lg formElement' type='submit'>Sign Up</button> 
+</form>

@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'gara6',
+    modulePrefix: 'prime-hiring',
     environment,
     rootURL: '/',
     locationType: 'auto',
